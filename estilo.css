@@ -20,11 +20,17 @@ h1 {
 }
 
 h3{
-  color: #ffffff; /* Color blanco que resalta */
+  color: #332929; /* Color blanco que resalta */
   padding: 0.5rem 1rem; /* Espaciado interior para resaltar el fondo */
   border-radius: 5px; /* Bordes redondeados */
   margin-bottom: 1rem;
   font-weight: bold;
+}
+
+.SUBE{
+  color: #332929;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
 }
 
 .beta {
