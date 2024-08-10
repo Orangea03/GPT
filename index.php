@@ -48,6 +48,16 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UPLOAD</title>
+    <style>
+        body {
+            background-image: url('fondo.jpg'); /* Imagen de fondo */
+            background-size: cover; /* La imagen cubrirá todo el fondo */
+            background-position: center; /* La imagen se centrará en la pantalla */
+            background-repeat: no-repeat; /* Evita que la imagen se repita */
+            height: 100vh; /* Asegura que el fondo cubra toda la altura de la ventana */
+            margin: 0; /* Elimina los márgenes predeterminados */
+        }
+    </style>
     <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
