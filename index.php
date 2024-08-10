@@ -2,7 +2,6 @@
 $carpetaNombre = isset($_GET['nombre']) ? htmlspecialchars($_GET['nombre']) : '';
 $carpetaRuta = "./descarga/" . $carpetaNombre;
 $mensaje = '';
-
 try {
     if (!file_exists($carpetaRuta)) {
         mkdir($carpetaRuta, 0755, true);
@@ -10,13 +9,13 @@ try {
     } else {
         $mensaje = "La carpeta '$carpetaNombre' ya existe.";
     }
-    
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_FILES['archivo'])) {
             foreach ($_FILES['archivo']['tmp_name'] as $key => $tmp_name) {
                 $archivo = $_FILES['archivo']['name'][$key];
+                // Replace spaces with underscores
+                $archivo = str_replace(' ', '_', $archivo);
                 if (move_uploaded_file($tmp_name, $carpetaRuta . '/' . $archivo)) {
-                    $subido = true;
                     $mensaje = "Archivo '$archivo' subido con éxito.";
                 } else {
                     throw new Exception("Error al subir el archivo '$archivo'.");
@@ -24,7 +23,6 @@ try {
             }
         }
     }
-
     if (isset($_POST['eliminarArchivo'])) {
         $archivoAEliminar = $_POST['eliminarArchivo'];
         $archivoRutaAEliminar = $carpetaRuta . '/' . $archivoAEliminar;
@@ -50,21 +48,22 @@ try {
     <title>UPLOAD</title>
     <style>
         body {
-            background-image: url('fondo.jpg'); /* Imagen de fondo */
-            background-size: cover; /* La imagen cubrirá todo el fondo */
-            background-position: center; /* La imagen se centrará en la pantalla */
-            background-repeat: no-repeat; /* Evita que la imagen se repita */
-            height: 100vh; /* Asegura que el fondo cubra toda la altura de la ventana */
-            margin: 0; /* Elimina los márgenes predeterminados */
+            background-image: url('fondo.jpg');
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat; 
+            height: 100vh; 
+            margin: 0; 
         }
     </style>
     <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-    <h1> Comparte videos, musica y mas<sup class="beta"> BETA </sup></h1>
+    <h1> Comparte videos,<br> musica y mas<sup class="beta"> BETA </sup></h1>
     <div class="content">
         <center>
-            <h3 class="SUBE">Enlace temporal: <span>ibu.pe/<?php echo $carpetaNombre;?></span></h3>
+            <h3 class="SUBE">Enlace temporal: <span id="shareLink"><br>websitestudio.site<?php echo $carpetaNombre;?></span></h3>
+            <button id="copyButton" onclick="copyToClipboard()">Copiar Enlace</button>
         </center>
         <div class="container">
             <div class="drop-area" id="drop-area">
@@ -105,5 +104,15 @@ try {
         </div>
     </div>
     <script src="upload.js"></script>
+    <script>
+        function copyToClipboard() {
+            const shareLink = document.getElementById('shareLink').innerText;
+            navigator.clipboard.writeText(shareLink).then(() => {
+                alert('Enlace copiado al portapapeles!');
+            }).catch(err => {
+                console.error('Error al copiar el enlace: ', err);
+            });
+        }
+    </script>
 </body>
 </html>
