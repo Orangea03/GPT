@@ -1,7 +1,7 @@
 <?php
 $carpetaNombre = isset($_GET['nombre']) ? htmlspecialchars($_GET['nombre']) : '';
 $carpetaRuta = "./descarga/" . $carpetaNombre;
-$mensaje = ''; // Initialize the message variable
+$mensaje = '';
 
 try {
     if (!file_exists($carpetaRuta)) {
@@ -51,7 +51,7 @@ try {
     <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-    <h1>Subir ABUELO<sup class="beta">BETA RAY BILL</sup></h1>
+    <h1> Subir <sup class="beta">BETA RAY BILL</sup></h1>
     <div class="content">
         <center>
             <h3 class="SUBE">Enlace temporal: <span>ibu.pe/<?php echo $carpetaNombre;?></span></h3>
